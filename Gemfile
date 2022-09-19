@@ -6,7 +6,7 @@ ruby '2.7.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.0.6'
 # Use mysql as the database for Active Record
-gem 'mysql2', '>= 0.4.4'
+gem 'mysql2', '~> 0.5.2'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -44,7 +44,7 @@ gem 'devise-jwt'
 gem 'dotenv', '~> 2.7', '>= 2.7.6'
 gem 'fast_jsonapi'
 gem 'httparty', '0.18.1'
-gem 'jsonapi-resources', '~> 0.10.2'
+gem 'jsonapi-resources', '0.10.2'
 gem 'paper_trail'
 gem 'sidekiq', '~> 6.3.1', '>= 6.3.1'
 gem 'rack-cors'
