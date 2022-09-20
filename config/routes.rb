@@ -11,7 +11,11 @@ Rails.application.routes.draw do
                      }
   namespace :api do
     namespace :v1 do
-      jsonapi_resources :users
+      jsonapi_resources :users do
+        collection do
+          post :verify_user
+        end
+      end
     end
   end
 end
