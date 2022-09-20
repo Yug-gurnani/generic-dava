@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddReferralTable < ActiveRecord::Migration[6.0]
   def change
     create_table :referrals do |t|

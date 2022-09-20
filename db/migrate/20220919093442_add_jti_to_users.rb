@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AddJtiToUsers < ActiveRecord::Migration[6.0]
   def change
     add_column :users, :jti, :string

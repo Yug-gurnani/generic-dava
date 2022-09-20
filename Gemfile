@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -47,6 +48,6 @@ gem 'fast_jsonapi'
 gem 'httparty', '0.18.1'
 gem 'jsonapi-resources', '0.10.2'
 gem 'paper_trail'
-gem 'sidekiq', '~> 6.3.1', '>= 6.3.1'
 gem 'rack-cors'
+gem 'sidekiq', '~> 6.3.1', '>= 6.3.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
