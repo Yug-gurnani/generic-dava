@@ -5,7 +5,7 @@ class AddProductsTable < ActiveRecord::Migration[6.0]
     create_table :products do |t|
       t.string :name, default: ''
       t.text :description
-      t.integer :quantity, default: 0
+      t.integer :total_stock, default: 0
       t.integer :max_price
       t.integer :selling_price
       t.string :image_url, default: ''

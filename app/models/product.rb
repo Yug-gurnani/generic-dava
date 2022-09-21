@@ -9,8 +9,8 @@
 #  image_url     :string(255)      default("")
 #  max_price     :integer
 #  name          :string(255)      default("")
-#  quantity      :integer          default(0)
 #  selling_price :integer
+#  total_stock   :integer          default(0)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
@@ -19,4 +19,8 @@
 #  index_products_on_name  (name) UNIQUE
 #
 class Product < ApplicationRecord
+  has_many :product_cart_mappings
+  has_many :carts, through: :product_cart_mappings
+  has_many :product_order_mappings
+  has_many :orders, through: :product_order_mappings
 end

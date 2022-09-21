@@ -34,4 +34,5 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: self
 
   enum user_type: %i[user admin]
+  has_one :cart
 end
