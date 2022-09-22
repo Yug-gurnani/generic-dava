@@ -12,7 +12,9 @@
 #  referred_user_id :integer
 #
 class Referral < ApplicationRecord
-  def self.generate_referral
-    Referral.create!(referral_code: SecureRandom.hex(4).upcase)
+  before_create :generate_referral
+
+  def generate_referral
+    self.referral_code = SecureRandom.hex(4).upcase
   end
 end

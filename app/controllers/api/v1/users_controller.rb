@@ -14,7 +14,7 @@ module Api
           return render_error({ message: 'Referral Code Already Used' }) if referral.used?
 
           current_user.update!(verified: true)
-          referral.update!(used: true)
+          referral.update!(used: true, referred_user_id: current_user.id)
           render_success({ message: 'User Verified Succesfully!' })
         else
           render_error({ message: 'Invalid Referral Code.' })

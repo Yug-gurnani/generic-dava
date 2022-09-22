@@ -5,7 +5,7 @@ ActiveAdmin.register Referral do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :used, :referred_user_id, :referral_code
+  permit_params :used, :referred_user_id, :referral_code
   #
   # or
   #
@@ -14,5 +14,4 @@ ActiveAdmin.register Referral do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
 end
