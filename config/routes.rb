@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       jsonapi_resources :users do
         collection do
           post :verify_user
+          post :update_products_in_cart
+          get :cart_details
         end
       end
       jsonapi_resources :products, only: %i[show index create update]

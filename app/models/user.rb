@@ -35,4 +35,23 @@ class User < ApplicationRecord
 
   enum user_type: %i[user admin]
   has_one :cart
+
+  after_create :create_cart
+
+  def create_cart
+    Cart.create!(user_id: id)
+  end
+
+  def cart_details
+    products = cart.product_cart_mappings.pluck(:product_id, :quantity)
+    data = []
+    products.each do |product|
+      product_id = product[0]
+      product_quantity = product[1]
+      product_attributes = Product.find_by_id(product_id).attributes
+
+      data << { product_details: product_attributes, product_quantity: product_quantity }
+    end
+    data
+  end
 end

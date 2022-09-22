@@ -21,6 +21,23 @@ module Api
         end
       end
 
+      def update_products_in_cart
+        cart = Cart.find_by(user_id: current_user.id)
+        return render_error({ message: 'Cart Not found!' }) if cart.blank?
+
+        products = params[:data][:attributes][:products]
+        products.each do |product_id, quantity|
+          pcm = ProductCartMapping.find_or_create_by(product_id: product_id, cart_id: cart.id)
+          pcm.update!(quantity: quantity)
+        end
+
+        render_success({ message: 'Cart Updated Succesfully!' })
+      end
+
+      def cart_details
+        render_success({ cart_details: current_user.cart_details })
+      end
+
       private
 
       def update_auth
