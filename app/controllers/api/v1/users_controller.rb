@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class UsersController < ApplicationController
+    class UsersController < ApiController
       include JSONAPI::ActsAsResourceController
       before_action :admin_auth, only: %i[index]
       before_action :update_auth, only: %i[update]

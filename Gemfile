@@ -51,3 +51,6 @@ gem 'paper_trail'
 gem 'rack-cors'
 gem 'sidekiq', '~> 6.3.1', '>= 6.3.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'activeadmin'
+gem 'sprockets', '<4'
+gem 'sass-rails'
