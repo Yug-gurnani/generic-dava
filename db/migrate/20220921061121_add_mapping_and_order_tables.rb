@@ -6,6 +6,6 @@ class AddMappingAndOrderTables < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    add_index :orders, :user_id, unique: true
+    add_index :orders, :user_id
   end
 end

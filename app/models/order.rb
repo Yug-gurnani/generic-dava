@@ -10,10 +10,10 @@
 #
 # Indexes
 #
-#  index_orders_on_user_id  (user_id) UNIQUE
+#  index_orders_on_user_id  (user_id)
 #
 class Order < ApplicationRecord
   belongs_to :user
-  has_many :product_order_mappings
+  has_many :product_order_mappings, dependent: :destroy
   has_many :products, through: :product_order_mappings
 end

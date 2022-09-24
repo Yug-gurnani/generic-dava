@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2022_09_22_113025) do
     t.boolean "delivered", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_orders_on_user_id", unique: true
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "product_cart_mappings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

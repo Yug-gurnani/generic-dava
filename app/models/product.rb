@@ -19,8 +19,8 @@
 #  index_products_on_name  (name) UNIQUE
 #
 class Product < ApplicationRecord
-  has_many :product_cart_mappings
+  has_many :product_cart_mappings, dependent: :destroy
   has_many :carts, through: :product_cart_mappings
-  has_many :product_order_mappings
+  has_many :product_order_mappings, dependent: :destroy
   has_many :orders, through: :product_order_mappings
 end

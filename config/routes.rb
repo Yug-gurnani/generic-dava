@@ -17,11 +17,12 @@ Rails.application.routes.draw do
       jsonapi_resources :users do
         collection do
           post :verify_user
-          post :update_products_in_cart
           get :cart_details
+          post :update_products_in_cart
         end
       end
       jsonapi_resources :products, only: %i[show index create update]
+      jsonapi_resources :orders
     end
   end
 end

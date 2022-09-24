@@ -13,6 +13,6 @@
 #
 class Cart < ApplicationRecord
   belongs_to :user
-  has_many :product_cart_mappings
+  has_many :product_cart_mappings, dependent: :destroy
   has_many :products, through: :product_cart_mappings
 end

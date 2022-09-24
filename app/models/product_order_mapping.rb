@@ -16,4 +16,10 @@
 class ProductOrderMapping < ApplicationRecord
   belongs_to :order
   belongs_to :product
+  after_save :touch_order
+
+  # To reset the order cache
+  def touch_order
+    order.touch
+  end
 end
