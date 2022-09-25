@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>You got a new order from <%= "#{@user.first_name} #{@user.last_name}".titleize %>!</p>
+    <p>
+    Order details<br>
+    --------------------------
+    <% @order_details.each do |product_id, quantity| -%>
+    <% product = Product.find_by(product_id) -%>
+    </p>
+      <p>Product Name: <%= product.name %></p>
+      <p>Product Price: <%= product.selling_price %></p>
+      <p>Product Quantity: <%= quantity %></p>
+      <p>Phone: <%= @user.phone_number %></p>
+      <p>Address: <%= @user.address %></p>
+    <p>
+    --------------------------
+    <%end;%>
+  </body>
+</html>

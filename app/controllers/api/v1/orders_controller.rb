@@ -22,13 +22,14 @@ module Api
           pom.update!(quantity: quantity)
         end
 
+        OrderMailer.with(order: order, order_details: order_details.permit!).new_order_email.deliver_later
         render_success({ message: 'Order Placed Succesfully!' })
       end
 
       private
 
       def access_auth
-        render_unauthorized unless params[:filter][:user_id].to_i == current_user.id || current_user.admin?
+        render_unauthorized unless params.dig(:filter, :user_id).to_i == current_user.id || current_user.admin?
       end
     end
   end
