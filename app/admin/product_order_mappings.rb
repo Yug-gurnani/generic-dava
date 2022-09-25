@@ -22,4 +22,8 @@ ActiveAdmin.register ProductOrderMapping do
     end
     f.actions
   end
+
+  filter :order, as: :select, collection: Order.all.pluck(:id)
+  filter :product
+  filter :quantity
 end

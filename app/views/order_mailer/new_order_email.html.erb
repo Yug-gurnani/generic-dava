@@ -6,6 +6,7 @@
   <body>
     <p>You got a new order from <%= "#{@user.first_name} #{@user.last_name}".titleize %>!</p>
     <p>
+    <p>Order Id: <%= @order.id %></p>
     Order details<br>
     --------------------------
     <% @order_details.each do |product_id, quantity| -%>
