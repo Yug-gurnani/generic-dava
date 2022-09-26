@@ -1,5 +1,4 @@
 class ApiController < ActionController::API
-  protect_from_forgery with: :null_session
   include ApiRenderConcern
   before_action :authenticate_user!
   before_action :check_verified_user, except: :verify_user
