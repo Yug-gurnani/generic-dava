@@ -19,9 +19,14 @@ Rails.application.routes.draw do
           post :verify_user
           get :cart_details
           post :update_products_in_cart
+          post :login
         end
       end
-      jsonapi_resources :products, only: %i[show index create update]
+      jsonapi_resources :products, only: %i[show index create update] do
+        collection do
+          get :recommendation
+        end
+      end
       jsonapi_resources :orders
     end
   end

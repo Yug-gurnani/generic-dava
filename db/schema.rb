@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_22_113025) do
+ActiveRecord::Schema.define(version: 2022_09_27_064733) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2022_09_22_113025) do
     t.string "image_url", default: ""
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "category", default: 0
     t.index ["name"], name: "index_products_on_name", unique: true
   end
 
@@ -103,8 +104,8 @@ ActiveRecord::Schema.define(version: 2022_09_22_113025) do
     t.boolean "verified", default: false
     t.text "address"
     t.string "phone_number"
-    t.string "first_name", default: ""
-    t.string "last_name", default: ""
+    t.string "name", default: ""
+    t.string "google_id", default: ""
     t.string "image_url", default: ""
     t.integer "user_type", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true

@@ -5,9 +5,13 @@ module Api
     # Product Resource
     class ProductResource < JSONAPI::Resource
       caching
-      attributes :name, :description, :max_price, :selling_price, :image_url, :total_stock, :created_at, :updated_at
+      attributes :name, :description, :max_price, :selling_price, :image_url, :total_stock, :category, :created_at, :updated_at
 
       paginator :paged
+      filter :category
+      filter :name, apply: lambda { |records, value, _options|
+        records.where('name LIKE ?', "#{value[0]}%")
+      }
     end
   end
 end

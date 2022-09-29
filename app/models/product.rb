@@ -5,6 +5,7 @@
 # Table name: products
 #
 #  id            :bigint           not null, primary key
+#  category      :integer          default(0)
 #  description   :text(65535)
 #  image_url     :string(255)      default("")
 #  max_price     :integer
@@ -23,4 +24,6 @@ class Product < ApplicationRecord
   has_many :carts, through: :product_cart_mappings
   has_many :product_order_mappings, dependent: :destroy
   has_many :orders, through: :product_order_mappings
+
+  enum category: %i[tablets injections syrups ointments]
 end

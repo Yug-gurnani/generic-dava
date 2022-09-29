@@ -17,7 +17,7 @@ ActiveAdmin.register Order do
 
   form do |f|
     f.inputs do
-      f.input :user_id, as: :select, collection: User.all.collect { |user| ["#{user.first_name} #{user.last_name}", user.id] }
+      f.input :user_id, as: :select, collection: User.all.collect { |user| [user.name, user.id] }
       f.input :delivered
       # f.input :catalog, :as => :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/products/:catalogs_product_product_id/catalogs', 'data-option-observed' => 'catalogs_product_product_id'}, :collection => (resource.product ? resource.product.category.catalogs.collect {|catalog| [catalog.attr_name, catalog.id]} : [])
     end

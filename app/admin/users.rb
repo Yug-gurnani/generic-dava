@@ -5,12 +5,12 @@ ActiveAdmin.register User do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :jti, :verified, :address, :phone_number, :first_name, :last_name, :image_url, :user_type
+  permit_params :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :jti, :verified, :address, :phone_number, :name, :google_id, :image_url, :user_type
   #
   # or
   #
   # permit_params do
-  #   permitted = [:email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :jti, :verified, :address, :phone_number, :first_name, :last_name, :image_url, :user_type]
+  #   permitted = [:email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :jti, :verified, :address, :phone_number, :name, :google_id, :image_url, :user_type]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end

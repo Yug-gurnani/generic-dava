@@ -27,15 +27,34 @@ module Api
 
         products = params[:data][:attributes][:products]
         products.each do |product_id, quantity|
-          pcm = ProductCartMapping.find_or_create_by(product_id: product_id, cart_id: cart.id)
-          pcm.update!(quantity: quantity)
+          if quantity <= 0
+            pcm = ProductCartMapping.find_by(product_id: product_id, cart_id: cart.id)
+            pcm.destroy if pcm.present?
+          else
+            pcm = ProductCartMapping.find_or_create_by(product_id: product_id, cart_id: cart.id)
+            pcm.update!(quantity: quantity)
+          end
         end
 
-        render_success({ message: 'Cart Updated Succesfully!' })
+        render_success({ message: 'Cart Updated Succesfully!', cart_details: current_user.cart_details })
       end
 
       def cart_details
         render_success({ cart_details: current_user.cart_details })
+      end
+
+      def login
+        code = params['code']
+        google_id = params['googleId']
+        return render_error({ message: 'google_id parameter not specified' }) if google_id.blank?
+
+        user = User.fetch_google_user(code, google_id)
+
+        if user.present?
+          sign_in(user)
+          return render_success(user.as_json.merge({ "type": 'users' })) if current_user.present?
+        end
+        render_error({ message: 'Error occured while authenticating' })
       end
 
       private

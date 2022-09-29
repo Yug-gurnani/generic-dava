@@ -4,7 +4,7 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <p>You got a new order from <%= "#{@user.first_name} #{@user.last_name}".titleize %>!</p>
+    <p>You got a new order from <%= @user.name.titleize %>!</p>
     <p>
     <p>Order Id: <%= @order.id %></p>
     Order details<br>

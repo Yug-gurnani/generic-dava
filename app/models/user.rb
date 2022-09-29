@@ -8,10 +8,9 @@
 #  address                :text(65535)
 #  email                  :string(255)      default(""), not null
 #  encrypted_password     :string(255)      default(""), not null
-#  first_name             :string(255)      default("")
 #  image_url              :string(255)      default("")
 #  jti                    :string(255)
-#  last_name              :string(255)      default("")
+#  name                   :string(255)      default("")
 #  phone_number           :string(255)
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
@@ -20,6 +19,7 @@
 #  verified               :boolean          default(FALSE)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  google_id              :string(255)      default("")
 #
 # Indexes
 #
@@ -53,5 +53,41 @@ class User < ApplicationRecord
       data << { product_details: product_attributes, product_quantity: product_quantity }
     end
     data
+  end
+
+  def self.fetch_google_user(code, google_id)
+    user_details = fetch_google_user_details(code)
+    return if user_details.nil?
+
+    create_google_user(user_details, google_id, referral_code)
+  end
+
+  def self.fetch_google_user_details(code)
+    url = URI("https://oauth2.googleapis.com/tokeninfo?id_token=#{code}")
+    https = Net::HTTP.new(url.host, url.port)
+    https.use_ssl = true
+    request = Net::HTTP::Post.new(url)
+    response = https.request(request)
+    JSON(response.read_body)
+  end
+
+  def self.create_google_user(user_details, googleId, _referral_code = '')
+    email = user_details['email']
+    name = user_details['name']
+    user = User.where(email: email).first
+    avatar = nil
+    avatar = user_details['picture'] if user_details['picture'].present?
+    if user.present?
+      user.update(google_id: google_id)
+      return user
+    end
+
+    User.create(
+      name: name,
+      email: email,
+      password: Devise.friendly_token[0, 20],
+      image_url: avatar,
+      google_id: google_id,
+    )
   end
 end
