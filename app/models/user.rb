@@ -55,26 +55,24 @@ class User < ApplicationRecord
     data
   end
 
-  def self.fetch_google_user(code, google_id)
-    user_details = fetch_google_user_details(code)
+  def self.fetch_google_user(access_token)
+    user_details = fetch_google_user_details(access_token)
     return if user_details.nil?
 
-    create_google_user(user_details, google_id, referral_code)
+    create_google_user(user_details)
   end
 
-  def self.fetch_google_user_details(code)
-    url = URI("https://oauth2.googleapis.com/tokeninfo?id_token=#{code}")
-    https = Net::HTTP.new(url.host, url.port)
-    https.use_ssl = true
-    request = Net::HTTP::Post.new(url)
-    response = https.request(request)
+  def self.fetch_google_user_details(access_token)
+    response = HTTParty.get('https://www.googleapis.com/oauth2/v2/userinfo',
+                            headers: { 'Authorization' => "OAuth #{access_token}" })
     JSON(response.read_body)
   end
 
-  def self.create_google_user(user_details, googleId, _referral_code = '')
+  def self.create_google_user(user_details)
     email = user_details['email']
     name = user_details['name']
-    user = User.where(email: email).first
+    google_id = user_details['id']
+    user = User.find_by(email: email)
     avatar = nil
     avatar = user_details['picture'] if user_details['picture'].present?
     if user.present?
@@ -87,7 +85,7 @@ class User < ApplicationRecord
       email: email,
       password: Devise.friendly_token[0, 20],
       image_url: avatar,
-      google_id: google_id,
+      google_id: google_id
     )
   end
 end

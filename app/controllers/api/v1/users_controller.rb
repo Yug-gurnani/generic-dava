@@ -44,11 +44,10 @@ module Api
       end
 
       def login
-        code = params['code']
-        google_id = params['googleId']
-        return render_error({ message: 'google_id parameter not specified' }) if google_id.blank?
+        access_token = params['access_token']
+        return render_error({ message: 'access_token parameter not specified' }) if access_token.blank?
 
-        user = User.fetch_google_user(code, google_id)
+        user = User.fetch_google_user(access_token)
 
         if user.present?
           sign_in(user)

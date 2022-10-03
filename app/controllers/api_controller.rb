@@ -1,7 +1,7 @@
 class ApiController < ActionController::API
   include ApiRenderConcern
-  before_action :authenticate_user!
-  before_action :check_verified_user, except: :verify_user
+  before_action :authenticate_user!, except: :login
+  before_action :check_verified_user, except: %i[login verify_user]
 
   private
 
