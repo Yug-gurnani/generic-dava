@@ -23,7 +23,7 @@ module Api
             product_quantity = mapping[1]
             product_attributes = Product.find_by_id(product_id).attributes
 
-            data << { id: order.id, delivered: order.delivered, product_details: product_attributes, product_quantity: product_quantity, created_at: order.created_at }
+            data << { id: order.id, delivered: order.delivered, created_at: order.created_at, product_details: product_attributes, product_quantity: product_quantity }
           end
         end
         render json: { data: data }, status: :ok
