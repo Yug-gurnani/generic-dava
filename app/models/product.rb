@@ -5,7 +5,7 @@
 # Table name: products
 #
 #  id            :bigint           not null, primary key
-#  category      :integer          default(0)
+#  category      :integer          default("tablets")
 #  description   :text(65535)
 #  image_url     :string(255)      default("")
 #  max_price     :integer

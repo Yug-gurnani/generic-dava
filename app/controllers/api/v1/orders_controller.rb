@@ -13,6 +13,22 @@ module Api
         }
       end
 
+      def index
+        orders = Order.where(user_id: params[:user_id])
+        data = []
+        orders.each do |order|
+          mappings = ProductOrderMapping.where(order_id: order.id).pluck(:product_id, :quantity)
+          mappings.each do |mapping|
+            product_id = mapping[0]
+            product_quantity = mapping[1]
+            product_attributes = Product.find_by_id(product_id).attributes
+
+            data << { id: order.id, delivered: order.delivered, product_details: product_attributes, product_quantity: product_quantity, created_at: order.created_at }
+          end
+        end
+        render json: { data: data }, status: :ok
+      end
+
       def create
         order = Order.create!(user_id: current_user.id)
 
@@ -29,7 +45,7 @@ module Api
       private
 
       def access_auth
-        render_unauthorized unless params.dig(:filter, :user_id).to_i == current_user.id || current_user.admin?
+        render_unauthorized unless params[:user_id].to_i == current_user.id || current_user.admin?
       end
     end
   end

@@ -23,9 +23,8 @@
 #
 # Indexes
 #
-#  index_users_on_email                 (email) UNIQUE
-#  index_users_on_jti                   (jti)
-#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_email  (email) UNIQUE
+#  index_users_on_jti    (jti)
 #
 require 'test_helper'
 
