@@ -5,7 +5,7 @@ module Api
     # Orders Controller
     class OrdersController < ApiController
       include JSONAPI::ActsAsResourceController
-      before_action :access_auth, only: %i[show index update destroy]
+      before_action :access_auth, only: %i[update destroy]
 
       def context
         {
@@ -14,7 +14,7 @@ module Api
       end
 
       def index
-        orders = Order.where(user_id: params[:user_id])
+        orders = Order.where(user_id: current_user.id)
         data = []
         orders.each do |order|
           mappings = ProductOrderMapping.where(order_id: order.id)
