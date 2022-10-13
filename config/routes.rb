@@ -20,6 +20,7 @@ Rails.application.routes.draw do
           get :cart_details
           post :update_products_in_cart
           post :login
+          delete :logout
         end
       end
       jsonapi_resources :products, only: %i[show index create update] do

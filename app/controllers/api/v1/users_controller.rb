@@ -56,6 +56,12 @@ module Api
         render_error({ message: 'Error occured while authenticating' })
       end
 
+      def logout
+        sign_out(current_user)
+
+        render_success({ message: 'Logged Out Succesfully!' })
+      end
+
       private
 
       def update_auth
