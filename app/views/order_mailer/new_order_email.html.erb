@@ -10,7 +10,7 @@
     Order details<br>
     --------------------------
     <% @order_details.each do |product_id, quantity| -%>
-    <% product = Product.find_by(product_id) -%>
+    <% product = Product.find_by(id: product_id) -%>
     </p>
       <p>Product Name: <%= product.name %></p>
       <p>Product Price: <%= product.selling_price %></p>
