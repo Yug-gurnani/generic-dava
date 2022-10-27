@@ -26,15 +26,16 @@ module Api
         return render_error({ message: 'Cart Not found!' }) if cart.blank?
 
         products = params[:data][:attributes][:products]
+        to_be_destroyed = []
         products.each do |product_id, quantity|
           if quantity <= 0
-            pcm = ProductCartMapping.find_by(product_id: product_id, cart_id: cart.id)
-            pcm.destroy if pcm.present?
+            to_be_destroyed << product_id
           else
-            pcm = ProductCartMapping.find_or_create_by(product_id: product_id, cart_id: cart.id)
+            pcm = ProductCartMapping.find_or_create_by(cart_id: cart.id, product_id: product_id)
             pcm.update!(quantity: quantity)
           end
         end
+        ProductCartMapping.where(product_id: to_be_destroyed).destroy_all
 
         render_success({ message: 'Cart Updated Succesfully!', cart_details: current_user.cart_details })
       end

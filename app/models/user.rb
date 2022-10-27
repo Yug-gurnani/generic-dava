@@ -42,7 +42,7 @@ class User < ApplicationRecord
   end
 
   def cart_details
-    products = cart.product_cart_mappings.pluck(:product_id, :quantity)
+    products = ProductCartMapping.where(cart_id: cart.id).pluck(:product_id, :quantity)
     data = []
     products.each do |product|
       product_id = product[0]
