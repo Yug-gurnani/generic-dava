@@ -8,9 +8,9 @@
 #  category      :integer          default("tablets")
 #  description   :text(65535)
 #  image_url     :string(255)      default("")
-#  max_price     :integer
+#  max_price     :float(24)
 #  name          :string(255)      default("")
-#  selling_price :integer
+#  selling_price :float(24)
 #  total_stock   :integer          default(0)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

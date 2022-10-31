@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_05_181729) do
+ActiveRecord::Schema.define(version: 2022_10_31_151513) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
@@ -75,8 +75,8 @@ ActiveRecord::Schema.define(version: 2022_10_05_181729) do
     t.string "name", default: ""
     t.text "description"
     t.integer "total_stock", default: 0
-    t.integer "max_price"
-    t.integer "selling_price"
+    t.float "max_price"
+    t.float "selling_price"
     t.string "image_url", default: ""
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
